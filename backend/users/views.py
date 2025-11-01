@@ -10,7 +10,7 @@ from .models import CustomUser, Patient
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def register(request):
-    print("Received data:", request.data)  # Debug line
+    print("Received data:", request.data)
     serializer = UserRegistrationSerializer(data=request.data)
     if serializer.is_valid():
         user = serializer.save()
@@ -21,7 +21,7 @@ def register(request):
             'user': UserSerializer(user).data
         }, status=status.HTTP_201_CREATED)
     else:
-        print("Validation errors:", serializer.errors)  # Debug line
+        print("Validation errors:", serializer.errors)
     return Response({
         'message': 'Registration failed',
         'errors': serializer.errors
@@ -58,14 +58,23 @@ def delete_user(request, user_id):
         return Response({'message': 'User deleted successfully'}, status=status.HTTP_200_OK)
     except CustomUser.DoesNotExist:
         return Response({'message': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
-    
-# patient's view 
+
+# Patient CRUD Views with Role-Based Access
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def patient_list_create(request):
     if request.method == 'GET':
-        # Get only patients created by the current user
-        patients = Patient.objects.filter(created_by=request.user)
+        # Role-based patient access
+        if request.user.role == 'admin':
+            # Admins see all patients
+            patients = Patient.objects.all()
+        elif request.user.role in ['doctor', 'nurse']:
+            # Doctors and nurses see all patients (healthcare team access)
+            patients = Patient.objects.all()
+        else:
+            # Default: only own patients
+            patients = Patient.objects.filter(created_by=request.user)
+        
         serializer = PatientSerializer(patients, many=True)
         return Response(serializer.data)
     
@@ -86,8 +95,19 @@ def patient_list_create(request):
 @permission_classes([IsAuthenticated])
 def patient_detail(request, patient_id):
     try:
-        # Ensure user can only access their own patients
-        patient = Patient.objects.get(id=patient_id, created_by=request.user)
+        patient = Patient.objects.get(id=patient_id)
+        
+        # Role-based access control
+        if request.user.role == 'admin':
+            # Admins can access any patient
+            pass
+        elif request.user.role in ['doctor', 'nurse']:
+            # Healthcare team can access any patient
+            pass
+        elif patient.created_by != request.user:
+            # Non-healthcare users can only access their own patients
+            return Response({'message': 'Access denied'}, status=status.HTTP_403_FORBIDDEN)
+            
     except Patient.DoesNotExist:
         return Response({'message': 'Patient not found'}, status=status.HTTP_404_NOT_FOUND)
     
@@ -96,6 +116,10 @@ def patient_detail(request, patient_id):
         return Response(serializer.data)
     
     elif request.method == 'PUT':
+        # Only allow updates if user has proper permissions
+        if request.user.role not in ['admin', 'doctor'] and patient.created_by != request.user:
+            return Response({'message': 'Insufficient permissions to update'}, status=status.HTTP_403_FORBIDDEN)
+            
         serializer = PatientSerializer(patient, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
@@ -109,5 +133,9 @@ def patient_detail(request, patient_id):
         }, status=status.HTTP_400_BAD_REQUEST)
     
     elif request.method == 'DELETE':
+        # Only admins and doctors can delete, or the creator
+        if request.user.role not in ['admin', 'doctor'] and patient.created_by != request.user:
+            return Response({'message': 'Insufficient permissions to delete'}, status=status.HTTP_403_FORBIDDEN)
+            
         patient.delete()
-        return Response({'message': 'Patient deleted successfully'}, status=status.HTTP_200_OK)    
+        return Response({'message': 'Patient deleted successfully'}, status=status.HTTP_200_OK)

@@ -16,7 +16,8 @@ export const Registration = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        password: ''
+        password: '', 
+        role: 'doctor'  // Only needed for registration
     });
     
     // Loading and error states
@@ -37,7 +38,7 @@ export const Registration = () => {
     const handleHomeClick = () => {
         setCurrentPage("home");
         setAction("Login");
-        setFormData({ name: '', email: '', password: '' });
+        setFormData({ name: '', email: '', password: '', role: 'doctor' });
         setError('');
         setSuccess('');
     };
@@ -48,7 +49,7 @@ export const Registration = () => {
         setUser(null);
         setCurrentPage("home");
         setAction("Login");
-        setFormData({ name: '', email: '', password: '' });
+        setFormData({ name: '', email: '', password: '', role: 'doctor' });
         setError('');
         setSuccess('');
     };
@@ -73,9 +74,10 @@ export const Registration = () => {
                 ? 'http://localhost:8000/api/auth/login/'
                 : 'http://localhost:8000/api/auth/register/';
 
+            // Different payloads for login vs registration
             const payload = action === "Login" 
                 ? { email: formData.email, password: formData.password }
-                : { name: formData.name, email: formData.email, password: formData.password };
+                : { name: formData.name, email: formData.email, password: formData.password, role: formData.role };
 
             const response = await fetch(url, {
                 method: 'POST',
@@ -90,7 +92,7 @@ export const Registration = () => {
             if (response.ok) {
                 setSuccess(action === "Login" ? 'Login successful!' : 'Registration successful!');
                 
-                // Store token and user data
+                // Store token and user data (includes role from backend)
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('user', JSON.stringify(data.user));
                 setUser(data.user);
@@ -98,7 +100,7 @@ export const Registration = () => {
                 // Redirect to dashboard
                 setTimeout(() => {
                     setCurrentPage("dashboard");
-                    setFormData({ name: '', email: '', password: '' });
+                    setFormData({ name: '', email: '', password: '', role: 'doctor' });
                     setSuccess('');
                 }, 1500);
             } else {
@@ -130,6 +132,9 @@ export const Registration = () => {
                     <p>Query patient's records with ease</p>
                     <button onClick={() => setCurrentPage("auth")}>Get Started</button>
                 </div>
+            <footer className="footer">
+                <p>© 2025 Health Directory Registry. All rights reserved | yaw</p>
+            </footer>                
             </div>
         );
     }
@@ -184,12 +189,35 @@ export const Registration = () => {
                             value={formData.password}
                             onChange={handleInputChange}
                         />
-                    </div>  
+                    </div>
+
+
+                    {action === "Sign Up" ? 
+                        <div className="input">   
+                            <select 
+                                name="role"
+                                value={formData.role}
+                                onChange={handleInputChange}
+                                style={{
+                                    padding: '0.75rem',
+                                    border: '1px solid #ddd',
+                                    borderRadius: '4px',
+                                    fontSize: '1rem',
+                                    width: '100%',
+                                    backgroundColor: 'white'
+                                }}
+                            >
+                                <option value="doctor">Doctor</option>
+                                <option value="nurse">Nurse</option>
+                                <option value="admin">Administrator</option>
+                            </select>
+                        </div>
+                    : <div></div>}
                 </div>
 
-                {action === "Sign Up" ? <div></div> :  
+                {/* {action === "Sign Up" ? <div></div> :  
                     <div className="forget_password">Forgot password ? <span>Click Here!</span> </div>
-                }
+                } */}
 
                 {action === "Login" ? 
                     <div className="new_account">Don't have an account ? <span onClick={()=>{setAction("Sign Up")}}>Register Here!</span> </div>
