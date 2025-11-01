@@ -4,7 +4,7 @@
     margin: auto; 
     margin-top: 80px;
     background: #fff;
-    padding-bottom: 30px;
+    padding-bottom: 5px;
     width: 600px;
 }
 
@@ -182,4 +182,31 @@
 
 .home-content button:hover {
     background-color: #0056b3;
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 20px auto;
+    width: 480px;
+    text-align: center;
+    border: 1px solid #f5c6cb;
+}
+
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 20px auto;
+    width: 480px;
+    text-align: center;
+    border: 1px solid #c3e6cb;
+}
+
+.submit.loading {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
