@@ -256,11 +256,43 @@
     text-shadow: none;
 }
 
-/* .role-select {
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-    width: 100%;
-    background-color: white;
-} */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        max-width: 90%;
+        margin-top: 1rem;
+    }
+
+    .text {
+        font-size: 2rem;
+    }
+
+    .input {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .input input, 
+    .input select,
+    .role-select {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .submit-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .navbar {
+        padding: 1rem;
+    }
+
+    .home-content {
+        padding: 2rem 1rem;
+    }
+
+    .home-content h1 {
+        font-size: 2rem;
+    }
+}
