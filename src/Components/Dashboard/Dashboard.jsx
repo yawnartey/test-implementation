@@ -246,7 +246,7 @@ const Dashboard = ({ user, onLogout }) => {
                 {/* Role-based access info - Only for admin */}
                 {user?.role === 'admin' && (
                     <div className="permission-notice admin">
-                        <strong>👨‍💼 Administrator Access:</strong> You have complete system access to all records and users.
+                        {/* <strong>👨‍💼 Administrator Access:</strong> You have complete system access to all records and users. */}
                     </div>
                 )}
 
