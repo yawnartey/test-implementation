@@ -4,7 +4,7 @@ This project demonstrates a proof of concept (POC) of a simple web application t
 
 ### Flow
 
-Insert flow chart here
+![WHDR Application Flow](./docs/images/process-flow.png)
 
 ### Technology stack
 
