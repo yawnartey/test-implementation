@@ -2,12 +2,14 @@
 
 This project demonstrates a proof of concept (POC) of a simple web application that performs a simple CRUD (Create, Update, Delete) task
 
-### Flow
+### End user flow
 
-![WHDR Application Flow](./docs/images/process-flow.png)
+![WHDR End user Flow](./docs/images/process-flow.png)
 
 ### Technology stack
 
 ![WHDR Technology Stack](./docs/images/technology-stack.png)
 
-### Architecture
+### Application flow (sort of architecture)
+
+![WHDR application flow](./docs/images/application-flow.png)
