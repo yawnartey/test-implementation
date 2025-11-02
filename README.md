@@ -8,15 +8,6 @@ This project demonstrates a proof of concept (POC) of a simple web application t
 
 ### Technology stack
 
-| Layer              | Technology            | Purpose                             |
-| ------------------ | --------------------- | ----------------------------------- |
-| **Frontend**       | React.js              | User Interface & User Experience    |
-| **Backend**        | Django REST Framework | API and business logic              |
-| **Database**       | MySQL                 | Data persistence                    |
-| **Infrastructure** | AWS EC2               | Cloud compute resources             |
-| **IaC**            | Terraform             | Infrastructure provisioning         |
-| **Networking**     | VPC, Security Groups  | Network security                    |
-| **Reverse Proxy**  | Nginx                 | Load balancing, SSL termination     |
-| **Authentication** | Django Token Auth     | User authentication & authorization |
+![WHDR Technology Stack](./docs/images/technology-stack.png)
 
 ### Architecture
