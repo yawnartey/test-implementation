@@ -209,7 +209,7 @@ export const Registration = () => {
                             >
                                 <option value="doctor">Doctor</option>
                                 <option value="nurse">Nurse</option>
-                                <option value="admin">Administrator</option>
+                                {/* <option value="admin">Administrator</option> */}
                             </select>
                         </div>
                     : <div></div>}
