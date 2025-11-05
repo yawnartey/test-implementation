@@ -33,8 +33,30 @@ npx create-react-app <name-of-app>
 - Nurses: Can view all patients, create new ones
 - Others: Only see their own created records
 
-### Testing Roles:
+### testing Roles:
 
 1. Create users with different roles during registration
 2. Login with different roles to test access levels
 3. Use Django admin to change user roles if needed
+
+## react variables & states explained
+
+[stateVariable, setStateFunction] = useState(initialValue)
+
+## eventListeners
+
+listens and handle user events and changes when interracting with the application such as click, typing hovering
+
+## react props
+
+props stand for properties in react. they are used to pass data from a parent component
+
+## react hooks
+
+basically a function that allows you to "hook into" react's current state and update them. examples of react hooks: useState, useEffect,
+useContext. basic usage of react hooks
+const [{name of state}, {name of function to change state}] = useState({initial value of state})
+
+## states
+
+they are variables that basically keep tracks of important pieces of information that needs to be passed between components.

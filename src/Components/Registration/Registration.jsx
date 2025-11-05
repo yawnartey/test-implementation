@@ -10,14 +10,13 @@ export const Registration = () => {
 
     const [action, setAction] = useState("Login");
     const [currentPage, setCurrentPage] = useState("home");
-    const [user, setUser] = useState(null); // Add user state
-    
+    const [user, setUser] = useState(null); 
     // Form data state
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         password: '', 
-        role: 'doctor'  // Only needed for registration
+        role: 'doctor' 
     });
     
     // Loading and error states

@@ -23,7 +23,7 @@ def register(request):
     else:
         print("Validation errors:", serializer.errors)
     return Response({
-        'message': 'Registration failed',
+        'message': 'Registration failed, check your credentials',
         'errors': serializer.errors
     }, status=status.HTTP_400_BAD_REQUEST)
 
@@ -40,7 +40,7 @@ def login(request):
             'user': UserSerializer(user).data
         }, status=status.HTTP_200_OK)
     return Response({
-        'message': 'Login failed',
+        'message': 'Login failed, check your credentials',
         'errors': serializer.errors
     }, status=status.HTTP_400_BAD_REQUEST)
 
