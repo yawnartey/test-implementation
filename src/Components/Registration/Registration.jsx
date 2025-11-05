@@ -11,7 +11,8 @@ export const Registration = () => {
     const [action, setAction] = useState("Login");
     const [currentPage, setCurrentPage] = useState("home");
     const [user, setUser] = useState(null); 
-    // Form data state
+
+    // Form data state to store form input variables when use  is completing forms
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -19,12 +20,12 @@ export const Registration = () => {
         role: 'doctor' 
     });
     
-    // Loading and error states
+    // Loading and error states to handle the user feedback during the form submission
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
-    // Check if user is already logged in
+    // Check if user is already logged in when the page is reloaded 
     useEffect(() => {
         const token = localStorage.getItem('token');
         const userData = localStorage.getItem('user');
@@ -34,6 +35,7 @@ export const Registration = () => {
         }
     }, []);
 
+    // Sets the user back to the homepage when they click on "WHDR (the home button)" on the navbar
     const handleHomeClick = () => {
         setCurrentPage("home");
         setAction("Login");
@@ -42,6 +44,8 @@ export const Registration = () => {
         setSuccess('');
     };
 
+
+    // Logs the user out and cleans up everything 
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
@@ -53,7 +57,7 @@ export const Registration = () => {
         setSuccess('');
     };
 
-    // Handle input changes
+    // Handles input changes and update form data when user types in any input fields
     const handleInputChange = (e) => {
         setFormData({
             ...formData,
@@ -62,13 +66,15 @@ export const Registration = () => {
         setError('');
     };
 
-    // Handle form submission
+    // Handles form submission
     const handleSubmit = async () => {
         setLoading(true);
         setError('');
         setSuccess('');
 
         try {
+
+            // Sends the right registration/login to the right api endpoint
             const url = action === "Login" 
                 ? 'http://localhost:8000/api/auth/login/'
                 : 'http://localhost:8000/api/auth/register/';
@@ -112,6 +118,7 @@ export const Registration = () => {
         }
     };
 
+    // Hit the enter the button to submit the login/registration form
     const handleKeyDown = (e) => {
         if (e.key === 'Enter' && !loading) {
             e.preventDefault();

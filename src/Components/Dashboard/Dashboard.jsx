@@ -35,8 +35,9 @@ const Dashboard = ({ user, onLogout }) => {
                patient.created_by === user.name;
     };
 
+    // All authenticated users can create patients
     const canCreate = () => {
-        return true; // All authenticated users can create patients
+        return true; 
     };
 
     const canViewAll = () => {
