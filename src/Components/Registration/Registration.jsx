@@ -113,6 +113,13 @@ export const Registration = () => {
         }
     };
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && !loading) {
+            e.preventDefault();
+            handleSubmit();
+        }
+    };
+
     // Show dashboard if user is logged in
     if (currentPage === "dashboard" && user) {
         return <Dashboard user={user} onLogout={handleLogout} />;
@@ -165,6 +172,7 @@ export const Registration = () => {
                                 placeholder="Name" 
                                 value={formData.name}
                                 onChange={handleInputChange}
+                                onKeyDown={handleKeyDown} 
                             />
                         </div>
                     }
@@ -177,6 +185,8 @@ export const Registration = () => {
                             placeholder="Email"
                             value={formData.email}
                             onChange={handleInputChange}
+                            onKeyDown={handleKeyDown}
+
                         />
                     </div>
 
@@ -188,6 +198,7 @@ export const Registration = () => {
                             placeholder="Password"
                             value={formData.password}
                             onChange={handleInputChange}
+                            onKeyDown={handleKeyDown}
                         />
                     </div>
 
