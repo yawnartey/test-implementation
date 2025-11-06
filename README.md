@@ -17,3 +17,5 @@ The diagram below gives a brief overview of how the application basically works 
 ### Application flow (sort of architecture)
 
 ![WHDR application flow](./docs/images/application-flow.png)
+
+![alt text](image.png)

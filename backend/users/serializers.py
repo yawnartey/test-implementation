@@ -2,6 +2,8 @@ from rest_framework import serializers
 from django.contrib.auth import authenticate
 from .models import CustomUser, Patient
 
+
+# Convert JSON objects to python objects whwen receiving data from React and vice-versa when sending to React 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     role = serializers.ChoiceField(choices=CustomUser.USER_ROLES, required=False)

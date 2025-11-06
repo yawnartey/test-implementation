@@ -22,7 +22,7 @@ django-admin startproject <name-of-project>
 ## function of manage.py
 
 django admin and manage.py can be used interchangeablly. to use manage.py, run the command below
-python manage.py
+python manage.py runserver
 
 ## creating an app
 
