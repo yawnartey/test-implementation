@@ -1,16 +1,42 @@
+### Python virtual environments
+
+## venv
+
+## create the new environment
+
+python -m venv myproject-env (for a new project)
+python3 -m venv venv (for an existing project)
+
+## activate the virtual environment
+
+source venv/bin/activate
+
+## install the required packages
+
+pip install -r requirements.txt (file has to be created)
+pip install django
+
 ## install pipenv to create virtual environment to install all the required packages
 
 pip install pipenv
-
-## install django in virtual environment using pipenv
-
-pipenv install django
+pip3 install pipenv
+brew install pipenv -- for macos
 
 ## activate pipenv virtual environment
 
 pipenv shell
 
-## selecting and setting the right interpreter
+## verify the virtual environment
+
+pipenv --venv
+
+## delete the virtual environment
+
+pipenv --rm
+
+## install django in virtual environment using pipenv
+
+pipenv install django
 
 pipenv --venv => returns the path
 add: \Scripts\python.exe to the end of path and set that as the intepretor
